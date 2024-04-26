@@ -1,0 +1,29 @@
+from tkinter import filedialog
+from tkinter import *
+import subprocess
+
+# Fonction pour choisir le fichier à craquer
+def browse_file_path():
+    root = Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(filetypes=[("Zip files", "*.zip")])
+    return file_path
+
+# Fonction pour craquer le fichier zip
+def crack_zip_file(zipfile_path, passwords_path):
+    command = f"zip2john {zipfile_path} | john --stdin --wordlist={passwords_path}"
+    output = subprocess.check_output(command, shell=True)
+    return output.decode("utf-8")
+
+# Chemin du fichier de mots de passe
+passwords_path = "D:\john-1.9.0-jumbo-1-win64\rockyou.txt"
+
+# Sélection du fichier à craquer
+zipfile_path = browse_file_path()
+
+if zipfile_path:
+    # Craquage du fichier
+    result = crack_zip_file(zipfile_path, passwords_path)
+    print(result)
+else:
+    print("Aucun fichier sélectionné.")

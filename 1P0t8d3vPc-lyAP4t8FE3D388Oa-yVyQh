@@ -1,0 +1,14 @@
+import nmap
+
+# Fonction pour scanner tous les ports ouverts sur une adresse IP donnée
+def scan_ports():
+    # Création de l'objet scanner Nmap
+    nm = nmap.PortScanner()
+    # Demande à l'utilisateur l'adresse IP à scanner
+    ip = input("Entrez l'adresse IP à scanner : ")
+    # Lancement du scan avec tous les ports ouverts
+    nm.scan(ip, arguments='-sS -T4 -p-')
+    # Affichage des résultats
+    for port in nm[ip]['tcp']:
+        if nm[ip]['tcp'][port]['state'] == 'open':
+            print('Port', port, 'est ouvert')

@@ -1,0 +1,64 @@
+print("""
+ #   #     ######    #            #####     #####               
+ #   #     #    #    #                ## ## ##
+ #####     #    #    #    #            ## ## 
+ #   #     #    #    #    #             ###
+ #   #     ######    ##########        ## ##
+ #   #                    #           ## ##
+                          #       #####   #####       
+
+                                               ###    ######    #######   #####    #######       # ########      ##########
+                                               #  #   #    #    #     #       #    #            #                    #
+                                               #  #   #    #    #     #       #    #           #                     #
+                                               #  #   # ####    #     #       #    ######     #                      #   
+                                               ###    # #       #     #       #    #          #                      #
+                                               #      #  #      #######     ###    #           #                     # 
+                                               #      #   #                        #######      #                    #   
+                                               #      #    #                                     #########           #
+                          """)
+
+
+# Menu principal
+while True:
+    print("1. Chiffrement/Déchiffrement") #octet --> entier
+    print("2. Scan réseau")
+    print("3. Crack password hash (Indisponible)")
+    print("4. Quitter")
+    choix = input("Entrez votre choix : ")
+
+    if choix == '1':
+        print("1. Chiffrement")
+        print("2. Déchiffrement")
+        choix_chiffrement = input("Entrez votre choix : ")
+        if choix_chiffrement == '1':
+            from module_chiffrement import encryption
+            encryption()
+        elif choix_chiffrement == '2':
+            from module_chiffrement import decryption
+            decryption()
+        else:
+            print("Choix invalide. Veuillez entrer un chiffre entre 1 et 2.")
+    elif choix == '2':
+        print("1. Scanner le réseau local")
+        print("2. Scanner les ports ouverts sur un hôte")
+        print("3. Scanner une plage d'adresses IP")
+        choix_scan = input("Entrez votre choix : ")
+        if choix_scan == '1':
+            from  module_scan_reseau import nmap_scan
+            nmap_scan()
+        elif choix_scan == '2':
+            from module_scan_port import scan_ports
+            scan_ports()
+        elif choix_scan == '3':
+            from module_can_range import scan_range
+            scan_range()
+        else:
+            print("Choix invalide. Veuillez entrer un chiffre entre 1 et 3.")
+    elif choix == '3' :
+        from module_crack_zip import crack_zip_file
+        crack_zip_file()
+
+    elif choix == '4':
+        break
+    else:
+        print("Choix invalide. Veuillez entrer un chiffre entre 1 et 4.")
